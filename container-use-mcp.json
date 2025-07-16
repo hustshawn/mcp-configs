@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "container-use": {
+      "command": "cu",
+      "args": [
+        "stdio"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}

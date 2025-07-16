@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "office": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-office@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "read_docx",
+        "extract_text",
+        "get_document_info"
+      ]
+    }
+  }
+}
