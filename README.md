@@ -41,27 +41,30 @@ Each configuration file follows this structure:
 ### AWS Services
 
 - **aws-core-mcp.json** - Core AWS services integration
+- **aws-core-cost-mcp.json** - Combined core AWS services and cost analysis
+- **aws-core-doc-mcp.json** - Combined core AWS services and documentation
 - **aws-cdk-mcp.json** - AWS CDK operations
 - **aws-cost-analyzer-mcp.json** - AWS cost analysis tools
-- **aws-cost-explora-mcp.json** - AWS cost explorer
+- **aws-cost-explora-mcp.json** - AWS cost explorer integration
 - **aws-diagram-mcp.json** - AWS architecture diagrams
 - **aws-doc-mcp.json** - AWS documentation access
 - **aws-doc-ecs-mcp.json** - AWS ECS documentation
 - **aws-ecs-mcp.json** - AWS ECS management
 - **aws-eks-mcp.json** - AWS EKS operations
+- **aws-updated-knowledge-mcp.json** - AWS Knowledge Base access via proxy (updated version)
 - **aws-terraform-mcp.json** - AWS Terraform integration
 
 ### Development Tools
 
-- **github-mcp-docker.json** - GitHub integration via Docker
-- **k8s-mcp-docker.json** - Kubernetes management via Docker
+- **github-docker-mcp.json** - GitHub integration via Docker
+- **k8s-docker-mcp.json** - Kubernetes management via Docker
 - **container-use-mcp.json** - Container utilities
 
 ### Productivity & Utilities
 
 - **amap-mcp.json** - Amap (高德地图) integration
 - **ms-office-mcp.json** - Microsoft Office document processing
-- **time-mcp-docker.json** - Time and date utilities
+- **time-docker-mcp.json** - Time and date utilities
 
 ## Prerequisites
 
@@ -86,7 +89,7 @@ docker --version
 Some configurations require environment variables. Create a `.kiro/settings/.env` file with:
 
 ```bash
-# GitHub (for github-mcp-docker.json)
+# GitHub (for github-docker-mcp.json)
 GITHUB_TOKEN=your_github_token
 
 # Amap (for amap-mcp.json)  
