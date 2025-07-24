@@ -48,10 +48,11 @@ Each configuration file follows this structure:
 - **aws-cost-explora-mcp.json** - AWS cost explorer integration
 - **aws-diagram-mcp.json** - AWS architecture diagrams
 - **aws-doc-mcp.json** - AWS documentation access
+- **aws-doc-docker-mcp.json** - AWS documentation access via Docker
 - **aws-doc-ecs-mcp.json** - AWS ECS documentation
 - **aws-ecs-mcp.json** - AWS ECS management
 - **aws-eks-mcp.json** - AWS EKS operations
-- **aws-updated-knowledge-mcp.json** - AWS Knowledge Base access via proxy (updated version)
+- **aws-knowledge-mcp.json** - AWS Knowledge Base access
 - **aws-terraform-mcp.json** - AWS Terraform integration
 
 ### Development Tools
@@ -64,6 +65,7 @@ Each configuration file follows this structure:
 
 - **amap-mcp.json** - Amap (高德地图) integration
 - **ms-office-mcp.json** - Microsoft Office document processing
+- **pdf-browser-mcp.json** - PDF document reading and text extraction
 - **time-docker-mcp.json** - Time and date utilities
 
 ## Prerequisites
