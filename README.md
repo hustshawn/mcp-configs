@@ -41,6 +41,7 @@ Each configuration file follows this structure:
 ### AWS Services
 
 - **aws-core-mcp.json** - Core AWS services integration
+- **aws-core-docker-mcp.json** - Core AWS services integration via Docker
 - **aws-core-cost-mcp.json** - Combined core AWS services and cost analysis
 - **aws-core-doc-mcp.json** - Combined core AWS services and documentation
 - **aws-cdk-mcp.json** - AWS CDK operations
