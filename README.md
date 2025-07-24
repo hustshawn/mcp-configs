@@ -66,7 +66,6 @@ Each configuration file follows this structure:
 
 - **amap-mcp.json** - Amap (高德地图) integration
 - **ms-office-mcp.json** - Microsoft Office document processing
-- **pdf-browser-mcp.json** - PDF document reading and text extraction
 - **time-docker-mcp.json** - Time and date utilities
 
 ## Prerequisites
