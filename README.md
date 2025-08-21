@@ -36,12 +36,16 @@ Each configuration file follows this structure:
 }
 ```
 
+Common patterns include:
+- **uvx servers**: `"command": "uvx", "args": ["package@latest"]`
+- **Docker servers**: `"command": "docker", "args": ["run", "-i", "--rm", "image"]`
+
 ## Available Configurations
 
 ### AWS Services
 
 - **aws-core-mcp.json** - Core AWS services integration
-- **aws-core-docker-mcp.json** - Core AWS services integration via Docker
+- **aws-core-docker-mcp.json** - Core AWS services integration via Docker (auto-approves: prompt_understanding)
 - **aws-core-cost-mcp.json** - Combined core AWS services and cost analysis
 - **aws-core-doc-mcp.json** - Combined core AWS services and documentation
 - **aws-cdk-mcp.json** - AWS CDK operations
@@ -49,7 +53,7 @@ Each configuration file follows this structure:
 - **aws-cost-explora-mcp.json** - AWS cost explorer integration
 - **aws-diagram-mcp.json** - AWS architecture diagrams
 - **aws-doc-mcp.json** - AWS documentation access
-- **aws-doc-docker-mcp.json** - AWS documentation access via Docker
+- **aws-doc-docker-mcp.json** - AWS documentation access via Docker (auto-approves: search_documentation, read_documentation)
 - **aws-doc-ecs-mcp.json** - AWS ECS documentation
 - **aws-ecs-mcp.json** - AWS ECS management
 - **aws-eks-mcp.json** - AWS EKS operations

@@ -7,6 +7,10 @@
         "-i",
         "--rm",
         "mcp/aws-core-mcp-server"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "prompt_understanding"
       ]
     }
   }

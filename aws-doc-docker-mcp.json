@@ -7,6 +7,11 @@
         "-i",
         "--rm",
         "mcp/aws-documentation"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "search_documentation",
+        "read_documentation"
       ]
     }
   }
