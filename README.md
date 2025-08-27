@@ -46,7 +46,7 @@ Common patterns include:
 
 - **aws-core-mcp.json** - Core AWS services integration
 - **aws-core-docker-mcp.json** - Core AWS services integration via Docker (auto-approves: prompt_understanding)
-- **aws-core-cost-mcp.json** - Combined core AWS services and cost analysis
+- **aws-core-cost-mcp.json** - Combined core AWS services and AWS pricing information
 - **aws-core-doc-mcp.json** - Combined core AWS services and documentation
 - **aws-cdk-mcp.json** - AWS CDK operations
 - **aws-cost-analyzer-mcp.json** - AWS cost analysis tools
