@@ -49,8 +49,9 @@ Common patterns include:
 - **aws-core-cost-mcp.json** - Combined core AWS services and AWS pricing information
 - **aws-core-doc-mcp.json** - Combined core AWS services and documentation
 - **aws-cdk-mcp.json** - AWS CDK operations
-- **aws-cost-analyzer-mcp.json** - AWS cost analysis tools
+- **aws-cost-analyzer-mcp.json** - AWS pricing and cost analysis tools (auto-approves: get_pricing_service_codes, get_pricing_service_attributes, get_pricing_attribute_values, get_pricing)
 - **aws-cost-explora-mcp.json** - AWS cost explorer integration
+- **aws-pricing-mcp.json** - AWS pricing information access (auto-approves: get_pricing_service_codes, get_pricing_service_attributes, get_pricing_attribute_values, get_pricing)
 - **aws-diagram-mcp.json** - AWS architecture diagrams
 - **aws-doc-mcp.json** - AWS documentation access
 - **aws-doc-docker-mcp.json** - AWS documentation access via Docker (auto-approves: search_documentation, read_documentation)
