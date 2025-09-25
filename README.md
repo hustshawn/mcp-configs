@@ -37,6 +37,7 @@ Each configuration file follows this structure:
 ```
 
 Common patterns include:
+
 - **uvx servers**: `"command": "uvx", "args": ["package@latest"]`
 - **Docker servers**: `"command": "docker", "args": ["run", "-i", "--rm", "image"]`
 
@@ -59,7 +60,7 @@ Common patterns include:
 - **aws-ecs-mcp.json** - AWS ECS management
 - **aws-eks-mcp.json** - AWS EKS operations
 - **aws-knowledge-mcp.json** - AWS Knowledge Base access
-- **aws-terraform-mcp.json** - AWS Terraform integration
+- **aws-terraform-docker-mcp.json** - AWS Terraform integration via Docker
 
 ### Development Tools
 

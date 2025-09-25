@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "aws-terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/aws-terraform"
+      ]
+    }
+  }
+}
