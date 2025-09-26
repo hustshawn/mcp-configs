@@ -64,6 +64,7 @@ Common patterns include:
 
 ### Development Tools
 
+- **chrome-devtools-mcp.json** - Chrome DevTools integration for browser automation and debugging
 - **github-docker-mcp.json** - GitHub integration via Docker
 - **k8s-docker-mcp.json** - Kubernetes management via Docker
 - **container-use-mcp.json** - Container utilities
