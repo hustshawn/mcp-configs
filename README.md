@@ -2,6 +2,8 @@
 
 A collection of Model Context Protocol (MCP) server configurations for various services and tools. These configurations can be used with Kiro IDE or other MCP-compatible clients.
 
+For Amazon Q CLI users, see the [cli-agents/](cli-agents/) directory for specialized agent configurations.
+
 ## What is MCP?
 
 Model Context Protocol (MCP) is an open standard that enables AI assistants to securely connect to external data sources and tools. Each configuration file in this repository defines how to connect to different MCP servers.
