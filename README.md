@@ -61,6 +61,7 @@ Common patterns include:
 - **aws-doc-ecs-mcp.json** - AWS ECS documentation
 - **aws-ecs-mcp.json** - AWS ECS management
 - **aws-eks-mcp.json** - AWS EKS operations
+- **aws-eks-remote-mcp.json** - AWS EKS remote operations via mcp-proxy-for-aws (auto-approves: manage_eks_stacks, list_eks_resources, describe_eks_resource, get_eks_insights, get_eks_vpc_config, list_k8s_resources, read_k8s_resource, manage_k8s_resource, apply_yaml, generate_app_manifest, list_api_versions, get_pod_logs, get_k8s_events, get_cloudwatch_logs, get_cloudwatch_metrics, get_eks_metrics_guidance, get_policies_for_role, add_inline_policy, search_eks_documentation, search_eks_troubleshooting_guide)
 - **aws-knowledge-mcp.json** - AWS Knowledge Base access
 - **aws-terraform-docker-mcp.json** - AWS Terraform integration via Docker
 

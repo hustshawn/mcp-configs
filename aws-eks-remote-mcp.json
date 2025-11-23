@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "eks-mcp": {
+      "command": "uvx",
+      "args": [
+        "mcp-proxy-for-aws@latest",
+        "https://eks-mcp.us-west-2.api.aws/mcp",
+        "--service",
+        "eks-mcp",
+        "--profile",
+        "default",
+        "--region",
+        "us-west-2"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "manage_eks_stacks",
+        "list_eks_resources",
+        "describe_eks_resource",
+        "get_eks_insights",
+        "get_eks_vpc_config",
+        "list_k8s_resources",
+        "read_k8s_resource",
+        "manage_k8s_resource",
+        "apply_yaml",
+        "generate_app_manifest",
+        "list_api_versions",
+        "get_pod_logs",
+        "get_k8s_events",
+        "get_cloudwatch_logs",
+        "get_cloudwatch_metrics",
+        "get_eks_metrics_guidance",
+        "get_policies_for_role",
+        "add_inline_policy",
+        "search_eks_documentation",
+        "search_eks_troubleshooting_guide"
+      ]
+    }
+  }
+}
