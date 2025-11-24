@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "ecs-mcp": {
+      "disabled": false,
+      "timeout": 60000,
+      "command": "uvx",
+      "args": [
+        "mcp-proxy-for-aws@latest",
+        "https://ecs-mcp.us-west-2.api.aws/mcp",
+        "--service",
+        "ecs-mcp",
+        "--profile",
+        "default",
+        "--region",
+        "us-west-2"
+      ],
+      "type": "stdio",
+      "autoApprove": [
+        "get_deployment_status",
+        "fetch_service_events",
+        "fetch_task_failures",
+        "fetch_task_logs",
+        "detect_image_pull_failures",
+        "fetch_network_configuration",
+        "get_task_definition_deletion_blockers"
+      ]
+    }
+  }
+}

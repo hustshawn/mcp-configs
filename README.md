@@ -45,39 +45,146 @@ Common patterns include:
 
 ## Available Configurations
 
-### AWS Services
+### AWS Core Services
 
-- **aws-core-mcp.json** - Core AWS services integration
-- **aws-core-docker-mcp.json** - Core AWS services integration via Docker (auto-approves: prompt_understanding)
-- **aws-core-cost-mcp.json** - Combined core AWS services and AWS pricing information
-- **aws-core-doc-mcp.json** - Combined core AWS services and documentation
-- **aws-cdk-mcp.json** - AWS CDK operations
-- **aws-cost-analyzer-mcp.json** - AWS pricing and cost analysis tools (auto-approves: get_pricing_service_codes, get_pricing_service_attributes, get_pricing_attribute_values, get_pricing)
-- **aws-cost-explora-mcp.json** - AWS cost explorer integration
-- **aws-pricing-mcp.json** - AWS pricing information access (auto-approves: get_pricing_service_codes, get_pricing_service_attributes, get_pricing_attribute_values, get_pricing)
-- **aws-diagram-mcp.json** - AWS architecture diagrams
+#### Single Server Configurations
+- **aws-core-mcp.json** - Core AWS services integration using uvx
+  - Package: `awslabs.core-mcp-server@latest`
+  - Provides foundational AWS service access and operations
+
+- **aws-core-docker-mcp.json** - Core AWS services via Docker
+  - Image: `mcp/aws-core-mcp-server`
+  - Auto-approves: `prompt_understanding`
+  - Containerized alternative to uvx-based core server
+
+#### Combined Configurations
+- **aws-core-doc-mcp.json** - Core AWS services + Documentation
+  - Combines `awslabs.core-mcp-server` and `awslabs.aws-documentation-mcp-server`
+  - One-stop configuration for AWS operations and documentation lookup
+
+- **aws-core-pricing-mcp.json** - Core AWS services + Pricing
+  - Combines `awslabs.core-mcp-server` and `awslabs.aws-pricing-mcp-server`
+  - Auto-approves pricing tools: `get_pricing_service_codes`, `get_pricing_service_attributes`, `get_pricing_attribute_values`, `get_pricing`
+  - Ideal for cost-aware infrastructure planning
+
+### AWS Documentation & Knowledge
+
 - **aws-doc-mcp.json** - AWS documentation access
-- **aws-doc-docker-mcp.json** - AWS documentation access via Docker (auto-approves: search_documentation, read_documentation)
-- **aws-doc-ecs-mcp.json** - AWS ECS documentation
-- **aws-ecs-mcp.json** - AWS ECS management
-- **aws-eks-mcp.json** - AWS EKS operations
-- **aws-eks-remote-mcp.json** - AWS EKS remote operations via mcp-proxy-for-aws (auto-approves: manage_eks_stacks, list_eks_resources, describe_eks_resource, get_eks_insights, get_eks_vpc_config, list_k8s_resources, read_k8s_resource, manage_k8s_resource, apply_yaml, generate_app_manifest, list_api_versions, get_pod_logs, get_k8s_events, get_cloudwatch_logs, get_cloudwatch_metrics, get_eks_metrics_guidance, get_policies_for_role, add_inline_policy, search_eks_documentation, search_eks_troubleshooting_guide)
+  - Package: `awslabs.aws-documentation-mcp-server@latest`
+  - Search, read, and get recommendations from AWS documentation
+
+- **aws-doc-docker-mcp.json** - AWS documentation via Docker
+  - Image: `mcp/aws-documentation`
+  - Auto-approves: `search_documentation`, `read_documentation`, `recommend`
+  - Containerized documentation access
+
+- **aws-doc-ecs-mcp.json** - AWS documentation + Diagrams
+  - Combines documentation server with diagram generation
+  - Useful for visualizing AWS architectures while reading docs
+
 - **aws-knowledge-mcp.json** - AWS Knowledge Base access
-- **aws-terraform-docker-mcp.json** - AWS Terraform integration via Docker
+  - Remote endpoint: `https://knowledge-mcp.global.api.aws`
+  - Uses `mcp-proxy` with streamable HTTP transport
+  - Access to AWS's centralized knowledge repository
+
+### AWS Container Services
+
+#### ECS (Elastic Container Service)
+- **aws-ecs-mcp.json** - AWS ECS management
+  - Package: `awslabs-ecs-mcp-server`
+  - Environment controls: `ALLOW_WRITE`, `ALLOW_SENSITIVE_DATA`
+  - Local ECS operations and monitoring
+
+- **aws-ecs-remote-mcp.json** - AWS ECS remote operations
+  - Remote endpoint: `https://ecs-mcp.us-west-2.api.aws/mcp`
+  - Uses `mcp-proxy-for-aws@latest`
+  - Auto-approves: `get_deployment_status`, `fetch_service_events`, `fetch_task_failures`, `fetch_task_logs`, `detect_image_pull_failures`, `fetch_network_configuration`, `get_task_definition_deletion_blockers`
+  - Comprehensive ECS troubleshooting and monitoring
+
+#### EKS (Elastic Kubernetes Service)
+- **aws-eks-mcp.json** - AWS EKS operations
+  - Package: `awslabs.eks-mcp-server@latest`
+  - Local EKS cluster management
+
+- **aws-eks-remote-mcp.json** - AWS EKS remote operations
+  - Remote endpoint: `https://eks-mcp.us-west-2.api.aws/mcp`
+  - Uses `mcp-proxy-for-aws@latest`
+  - Extensive auto-approvals for EKS and Kubernetes operations including:
+    - Cluster management: `manage_eks_stacks`, `list_eks_resources`, `describe_eks_resource`
+    - Kubernetes operations: `list_k8s_resources`, `read_k8s_resource`, `manage_k8s_resource`, `apply_yaml`
+    - Monitoring: `get_pod_logs`, `get_k8s_events`, `get_cloudwatch_logs`, `get_cloudwatch_metrics`
+    - IAM: `get_policies_for_role`, `add_inline_policy`
+    - Documentation: `search_eks_documentation`, `search_eks_troubleshooting_guide`
+
+### AWS Infrastructure as Code
+
+- **aws-cdk-mcp.json** - AWS CDK operations
+  - Package: `awslabs.cdk-mcp-server@latest`
+  - Cloud Development Kit integration for infrastructure as code
+
+- **aws-terraform-mcp.json** - AWS Terraform integration
+  - Package: `awslabs.terraform-mcp-server@latest`
+  - Terraform operations and AWS resource management
+
+- **aws-terraform-docker-mcp.json** - AWS Terraform via Docker
+  - Image: `mcp/aws-terraform`
+  - Containerized Terraform integration
+
+### AWS Cost Management
+
+- **aws-pricing-mcp.json** - AWS pricing information
+  - Package: `awslabs.aws-pricing-mcp-server@latest`
+  - Auto-approves: `get_pricing_service_codes`, `get_pricing_service_attributes`, `get_pricing_attribute_values`, `get_pricing`
+  - Query AWS service pricing and cost estimates
+
+- **aws-cost-explora-mcp.json** - AWS Cost Explorer integration
+  - Package: `awslabs.cost-explorer-mcp-server@latest`
+  - Analyze historical AWS spending and usage patterns
+
+### AWS Visualization
+
+- **aws-diagram-mcp.json** - AWS architecture diagrams
+  - Package: `awslabs.aws-diagram-mcp-server`
+  - Generate visual representations of AWS architectures
 
 ### Development Tools
 
-- **browser-mcp.json** - Browser automation and web interaction capabilities
-- **chrome-devtools-mcp.json** - Chrome DevTools integration for browser automation and debugging
-- **github-docker-mcp.json** - GitHub integration via Docker
-- **k8s-docker-mcp.json** - Kubernetes management via Docker
+- **browser-mcp.json** - Browser automation
+  - Package: `@browsermcp/mcp@latest` (npx)
+  - Web interaction and browser automation capabilities
+
+- **chrome-devtools-mcp.json** - Chrome DevTools integration
+  - Package: `chrome-devtools-mcp@latest` (npx)
+  - Browser debugging and automation via Chrome DevTools Protocol
+
+- **github-docker-mcp.json** - GitHub integration
+  - Image: `ghcr.io/github/github-mcp-server`
+  - Requires: `GITHUB_TOKEN` environment variable
+  - GitHub repository operations and API access
+
+- **k8s-docker-mcp.json** - Kubernetes management
+  - Image: `mcp/kubernetes`
+  - Kubernetes cluster operations via Docker
+
 - **container-use-mcp.json** - Container utilities
+  - Command: `cu stdio`
+  - Container usage and management tools
 
 ### Productivity & Utilities
 
-- **amap-mcp.json** - Amap (高德地图) integration
+- **amap-mcp.json** - Amap (高德地图) mapping service
+  - Package: `amap-mcp-server`
+  - Requires: `AMAP_MAPS_API_KEY` environment variable
+  - Chinese mapping and location services
+
 - **ms-office-mcp.json** - Microsoft Office document processing
+  - Package: `mcp-server-office@latest`
+  - Auto-approves: `read_docx`, `extract_text`, `get_document_info`
+  - Read and process Word documents and other Office files
+
 - **time-docker-mcp.json** - Time and date utilities
+  - Image: `mcp/time`
+  - Time zone conversions and date calculations
 
 ## Prerequisites
 
