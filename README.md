@@ -130,6 +130,16 @@ Common patterns include:
   - Image: `mcp/aws-terraform`
   - Containerized Terraform integration
 
+- **aws-serverless-mcp.json** - AWS Serverless operations
+  - Package: `awslabs.aws-serverless-mcp-server@latest`
+  - Flags: `--allow-write`, `--allow-sensitive-data-access`
+  - Serverless application development and management
+
+- **aws-serverless-mcp.json** - AWS Serverless operations
+  - Package: `awslabs.aws-serverless-mcp-server@latest`
+  - Flags: `--allow-write`, `--allow-sensitive-data-access`
+  - Serverless application development and management
+
 ### AWS Cost Management
 
 - **aws-pricing-mcp.json** - AWS pricing information
