@@ -1,12 +1,12 @@
 {
   "mcpServers": {
     "aws-knowledge-mcp-server": {
-      "command": "uvx",
-      "args": [
-        "mcp-proxy",
-        "--transport",
-        "streamablehttp",
-        "https://knowledge-mcp.global.api.aws"
+      "type": "http",
+      "url": "https://knowledge-mcp.global.api.aws",
+      "disabled": false,
+      "autoApprove": [
+        "aws___read_documentation",
+        "aws___search_documentation"
       ]
     }
   }

@@ -42,159 +42,115 @@ Common patterns include:
 
 - **uvx servers**: `"command": "uvx", "args": ["package@latest"]`
 - **Docker servers**: `"command": "docker", "args": ["run", "-i", "--rm", "image"]`
+- **npx servers**: `"command": "npx", "args": ["package@latest"]`
+- **HTTP servers**: `"type": "http", "url": "https://endpoint.api.aws"` (direct connection to remote MCP endpoints)
 
 ## Available Configurations
 
 ### AWS Core Services
 
-#### Single Server Configurations
-- **aws-core-mcp.json** - Core AWS services integration using uvx
-  - Package: `awslabs.core-mcp-server@latest`
-  - Provides foundational AWS service access and operations
-
-- **aws-core-docker-mcp.json** - Core AWS services via Docker
-  - Image: `mcp/aws-core-mcp-server`
-  - Auto-approves: `prompt_understanding`
-  - Containerized alternative to uvx-based core server
-
-#### Combined Configurations
-- **aws-core-doc-mcp.json** - Core AWS services + Documentation
-  - Combines `awslabs.core-mcp-server` and `awslabs.aws-documentation-mcp-server`
-  - One-stop configuration for AWS operations and documentation lookup
-
-- **aws-core-pricing-mcp.json** - Core AWS services + Pricing
-  - Combines `awslabs.core-mcp-server` and `awslabs.aws-pricing-mcp-server`
-  - Auto-approves pricing tools: `get_pricing_service_codes`, `get_pricing_service_attributes`, `get_pricing_attribute_values`, `get_pricing`
-  - Ideal for cost-aware infrastructure planning
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-core-mcp.json` | uvx | Core AWS services integration using `awslabs.core-mcp-server@latest` |
+| `aws-core-docker-mcp.json` | Docker | Core AWS services via `mcp/aws-core-mcp-server` container |
+| `aws-core-doc-mcp.json` | uvx | Combined: Core AWS + Documentation servers |
+| `aws-core-pricing-mcp.json` | uvx | Combined: Core AWS + Pricing servers with auto-approved pricing tools |
 
 ### AWS Documentation & Knowledge
 
-- **aws-doc-mcp.json** - AWS documentation access
-  - Package: `awslabs.aws-documentation-mcp-server@latest`
-  - Search, read, and get recommendations from AWS documentation
-
-- **aws-doc-docker-mcp.json** - AWS documentation via Docker
-  - Image: `mcp/aws-documentation`
-  - Auto-approves: `search_documentation`, `read_documentation`, `recommend`
-  - Containerized documentation access
-
-- **aws-doc-ecs-mcp.json** - AWS documentation + Diagrams
-  - Combines documentation server with diagram generation
-  - Useful for visualizing AWS architectures while reading docs
-
-- **aws-knowledge-mcp.json** - AWS Knowledge Base access
-  - Remote endpoint: `https://knowledge-mcp.global.api.aws`
-  - Uses `mcp-proxy` with streamable HTTP transport
-  - Access to AWS's centralized knowledge repository
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-doc-mcp.json` | uvx | AWS documentation access via `awslabs.aws-documentation-mcp-server@latest` |
+| `aws-doc-docker-mcp.json` | Docker | AWS documentation via `mcp/aws-documentation` container |
+| `aws-doc-ecs-mcp.json` | uvx | Combined: Documentation + Diagram generation servers |
+| `aws-knowledge-mcp.json` | HTTP | Direct connection to AWS Knowledge Base at `https://knowledge-mcp.global.api.aws` |
 
 ### AWS Container Services
 
 #### ECS (Elastic Container Service)
-- **aws-ecs-mcp.json** - AWS ECS management
-  - Package: `awslabs-ecs-mcp-server`
-  - Environment controls: `ALLOW_WRITE`, `ALLOW_SENSITIVE_DATA`
-  - Local ECS operations and monitoring
 
-- **aws-ecs-remote-mcp.json** - AWS ECS remote operations
-  - Remote endpoint: `https://ecs-mcp.us-west-2.api.aws/mcp`
-  - Uses `mcp-proxy-for-aws@latest`
-  - Auto-approves: `get_deployment_status`, `fetch_service_events`, `fetch_task_failures`, `fetch_task_logs`, `detect_image_pull_failures`, `fetch_network_configuration`, `get_task_definition_deletion_blockers`
-  - Comprehensive ECS troubleshooting and monitoring
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-ecs-mcp.json` | uvx | Local ECS operations via `awslabs-ecs-mcp-server` with write/sensitive data controls |
+| `aws-ecs-remote-mcp.json` | uvx (proxy) | Remote ECS via `https://ecs-mcp.us-west-2.api.aws/mcp` with extensive auto-approvals for troubleshooting |
 
 #### EKS (Elastic Kubernetes Service)
-- **aws-eks-mcp.json** - AWS EKS operations
-  - Package: `awslabs.eks-mcp-server@latest`
-  - Local EKS cluster management
 
-- **aws-eks-remote-mcp.json** - AWS EKS remote operations
-  - Remote endpoint: `https://eks-mcp.us-west-2.api.aws/mcp`
-  - Uses `mcp-proxy-for-aws@latest`
-  - Extensive auto-approvals for EKS and Kubernetes operations including:
-    - Cluster management: `manage_eks_stacks`, `list_eks_resources`, `describe_eks_resource`
-    - Kubernetes operations: `list_k8s_resources`, `read_k8s_resource`, `manage_k8s_resource`, `apply_yaml`
-    - Monitoring: `get_pod_logs`, `get_k8s_events`, `get_cloudwatch_logs`, `get_cloudwatch_metrics`
-    - IAM: `get_policies_for_role`, `add_inline_policy`
-    - Documentation: `search_eks_documentation`, `search_eks_troubleshooting_guide`
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-eks-mcp.json` | uvx | Local EKS operations via `awslabs.eks-mcp-server@latest` |
+| `aws-eks-remote-mcp.json` | uvx (proxy) | Remote EKS via `https://eks-mcp.us-west-2.api.aws/mcp` with comprehensive auto-approvals for cluster management, K8s operations, monitoring, and IAM |
 
 ### AWS Infrastructure as Code
 
-- **aws-cdk-mcp.json** - AWS CDK operations
-  - Package: `awslabs.cdk-mcp-server@latest`
-  - Cloud Development Kit integration for infrastructure as code
-
-- **aws-terraform-mcp.json** - AWS Terraform integration
-  - Package: `awslabs.terraform-mcp-server@latest`
-  - Terraform operations and AWS resource management
-
-- **aws-terraform-docker-mcp.json** - AWS Terraform via Docker
-  - Image: `mcp/aws-terraform`
-  - Containerized Terraform integration
-
-- **aws-serverless-mcp.json** - AWS Serverless operations
-  - Package: `awslabs.aws-serverless-mcp-server@latest`
-  - Flags: `--allow-write`, `--allow-sensitive-data-access`
-  - Serverless application development and management
-
-- **aws-serverless-mcp.json** - AWS Serverless operations
-  - Package: `awslabs.aws-serverless-mcp-server@latest`
-  - Flags: `--allow-write`, `--allow-sensitive-data-access`
-  - Serverless application development and management
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-cdk-mcp.json` | uvx | AWS CDK operations via `awslabs.cdk-mcp-server@latest` |
+| `aws-terraform-mcp.json` | uvx | Terraform integration via `awslabs.terraform-mcp-server@latest` |
+| `aws-terraform-docker-mcp.json` | Docker | Terraform via `mcp/aws-terraform` container |
+| `aws-serverless-mcp.json` | uvx | Serverless operations via `awslabs.aws-serverless-mcp-server@latest` with write and sensitive data access |
 
 ### AWS Cost Management
 
-- **aws-pricing-mcp.json** - AWS pricing information
-  - Package: `awslabs.aws-pricing-mcp-server@latest`
-  - Auto-approves: `get_pricing_service_codes`, `get_pricing_service_attributes`, `get_pricing_attribute_values`, `get_pricing`
-  - Query AWS service pricing and cost estimates
-
-- **aws-cost-explora-mcp.json** - AWS Cost Explorer integration
-  - Package: `awslabs.cost-explorer-mcp-server@latest`
-  - Analyze historical AWS spending and usage patterns
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-pricing-mcp.json` | uvx | AWS pricing queries via `awslabs.aws-pricing-mcp-server@latest` with auto-approved pricing tools |
+| `aws-cost-explora-mcp.json` | uvx | Cost Explorer analysis via `awslabs.cost-explorer-mcp-server@latest` |
 
 ### AWS Visualization
 
-- **aws-diagram-mcp.json** - AWS architecture diagrams
-  - Package: `awslabs.aws-diagram-mcp-server`
-  - Generate visual representations of AWS architectures
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `aws-diagram-mcp.json` | uvx | Architecture diagrams via `awslabs.aws-diagram-mcp-server` |
 
 ### Development Tools
 
-- **browser-mcp.json** - Browser automation
-  - Package: `@browsermcp/mcp@latest` (npx)
-  - Web interaction and browser automation capabilities
-
-- **chrome-devtools-mcp.json** - Chrome DevTools integration
-  - Package: `chrome-devtools-mcp@latest` (npx)
-  - Browser debugging and automation via Chrome DevTools Protocol
-
-- **github-docker-mcp.json** - GitHub integration
-  - Image: `ghcr.io/github/github-mcp-server`
-  - Requires: `GITHUB_TOKEN` environment variable
-  - GitHub repository operations and API access
-
-- **k8s-docker-mcp.json** - Kubernetes management
-  - Image: `mcp/kubernetes`
-  - Kubernetes cluster operations via Docker
-
-- **container-use-mcp.json** - Container utilities
-  - Command: `cu stdio`
-  - Container usage and management tools
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `browser-mcp.json` | npx | Browser automation via `@browsermcp/mcp@latest` |
+| `chrome-devtools-mcp.json` | npx | Chrome DevTools Protocol integration via `chrome-devtools-mcp@latest` |
+| `github-docker-mcp.json` | Docker | GitHub operations via `ghcr.io/github/github-mcp-server` (requires `GITHUB_TOKEN`) |
+| `k8s-docker-mcp.json` | Docker | Kubernetes management via `mcp/kubernetes` container |
+| `container-use-mcp.json` | CLI | Container utilities via `cu stdio` command |
 
 ### Productivity & Utilities
 
-- **amap-mcp.json** - Amap (高德地图) mapping service
-  - Package: `amap-mcp-server`
-  - Requires: `AMAP_MAPS_API_KEY` environment variable
-  - Chinese mapping and location services
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `amap-mcp.json` | uvx | Amap (高德地图) mapping service (requires `AMAP_MAPS_API_KEY`) |
+| `ms-office-mcp.json` | uvx | Microsoft Office document processing via `mcp-server-office@latest` |
+| `time-docker-mcp.json` | Docker | Time and date utilities via `mcp/time` container |
 
-- **ms-office-mcp.json** - Microsoft Office document processing
-  - Package: `mcp-server-office@latest`
-  - Auto-approves: `read_docx`, `extract_text`, `get_document_info`
-  - Read and process Word documents and other Office files
+## Configuration Details
 
-- **time-docker-mcp.json** - Time and date utilities
-  - Image: `mcp/time`
-  - Time zone conversions and date calculations
+### Auto-Approved Tools by Configuration
+
+Some configurations come with pre-approved tools for seamless operation:
+
+**aws-knowledge-mcp.json**
+- `aws___read_documentation`, `aws___search_documentation`
+
+**aws-pricing-mcp.json / aws-core-pricing-mcp.json**
+- `get_pricing_service_codes`, `get_pricing_service_attributes`, `get_pricing_attribute_values`, `get_pricing`
+
+**aws-ecs-remote-mcp.json**
+- `get_deployment_status`, `fetch_service_events`, `fetch_task_failures`, `fetch_task_logs`, `detect_image_pull_failures`, `fetch_network_configuration`, `get_task_definition_deletion_blockers`
+
+**aws-eks-remote-mcp.json**
+- Cluster: `manage_eks_stacks`, `list_eks_resources`, `describe_eks_resource`, `get_eks_insights`, `get_eks_vpc_config`
+- Kubernetes: `list_k8s_resources`, `read_k8s_resource`, `manage_k8s_resource`, `apply_yaml`, `generate_app_manifest`, `list_api_versions`
+- Monitoring: `get_pod_logs`, `get_k8s_events`, `get_cloudwatch_logs`, `get_cloudwatch_metrics`, `get_eks_metrics_guidance`
+- IAM: `get_policies_for_role`, `add_inline_policy`
+- Docs: `search_eks_documentation`, `search_eks_troubleshooting_guide`
+
+**ms-office-mcp.json**
+- `read_docx`, `extract_text`, `get_document_info`
+
+**aws-doc-docker-mcp.json**
+- `search_documentation`, `read_documentation`, `recommend`
+
+**aws-core-docker-mcp.json**
+- `prompt_understanding`
 
 ## Prerequisites
 
@@ -205,6 +161,14 @@ Common patterns include:
 pip install uv
 # or via homebrew
 brew install uv
+```
+
+### For npx-based servers
+
+```bash
+# Ensure Node.js and npm are installed
+node --version
+npm --version
 ```
 
 ### For Docker-based servers
@@ -229,6 +193,7 @@ AMAP_MAPS_API_KEY=your_amap_api_key
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_REGION=your_preferred_region
+AWS_PROFILE=default
 ```
 
 ## Installation Examples
@@ -240,52 +205,45 @@ AWS_REGION=your_preferred_region
 cp aws-core-mcp.json .kiro/settings/mcp.json
 ```
 
-### Multiple Configurations
+### Combined Configurations
 
-Some configuration files already combine multiple servers. For example, `aws-core-doc-mcp.json` includes both core AWS services and documentation:
+Some configuration files already combine multiple servers:
+
+- `aws-core-doc-mcp.json` - Core AWS + Documentation
+- `aws-core-pricing-mcp.json` - Core AWS + Pricing
+- `aws-doc-ecs-mcp.json` - Documentation + Diagrams
+
+### Manual Merge
+
+To combine configurations manually, merge the `mcpServers` objects from multiple files:
 
 ```json
 {
   "mcpServers": {
-    "awslabs.core-mcp-server": {
-      "command": "uvx",
-      "args": ["awslabs.core-mcp-server@latest"],
-      "env": {
-        "FASTMCP_LOG_LEVEL": "ERROR"
-      },
-      "autoApprove": [],
-      "disabled": false
-    },
-    "awslabs.aws-documentation-mcp-server": {
-      "command": "uvx",
-      "args": ["awslabs.aws-documentation-mcp-server@latest"],
-      "env": {
-        "FASTMCP_LOG_LEVEL": "ERROR",
-        "AWS_PROFILE": "default"
-      },
-      "disabled": false,
-      "autoApprove": []
-    }
+    "server-from-file-1": { ... },
+    "server-from-file-2": { ... }
   }
 }
 ```
 
-You can also manually merge configurations by combining the `mcpServers` objects from multiple files.
-
 ## Configuration Options
 
-- **command**: The executable to run the MCP server
-- **args**: Command line arguments
-- **env**: Environment variables for the server
-- **disabled**: Set to `true` to disable the server
-- **autoApprove**: List of tools to auto-approve without user confirmation
-- **timeout**: Timeout in milliseconds for server operations
+| Option | Description |
+|--------|-------------|
+| `command` | The executable to run the MCP server (`uvx`, `docker`, `npx`, etc.) |
+| `args` | Command line arguments |
+| `env` | Environment variables for the server |
+| `type` | Connection type (`stdio` for command-based, `http` for direct HTTP) |
+| `url` | URL for HTTP-type connections |
+| `disabled` | Set to `true` to disable the server |
+| `autoApprove` | List of tools to auto-approve without user confirmation |
+| `timeout` | Timeout in milliseconds for server operations |
 
 ## Troubleshooting
 
 ### Server Won't Start
 
-1. Check that required dependencies are installed (uvx, Docker, etc.)
+1. Check that required dependencies are installed (uvx, Docker, npx, etc.)
 2. Verify environment variables are set correctly
 3. Check the MCP Server view in Kiro for error messages
 
@@ -294,6 +252,13 @@ You can also manually merge configurations by combining the `mcpServers` objects
 - Ensure Docker daemon is running for Docker-based servers
 - Check that environment files have correct permissions
 - Verify API keys and tokens are valid
+
+### HTTP Connection Issues
+
+For HTTP-type servers (like `aws-knowledge-mcp.json`), ensure:
+- Network connectivity to the endpoint
+- Valid AWS credentials if required
+- No firewall blocking the connection
 
 ## Contributing
 
